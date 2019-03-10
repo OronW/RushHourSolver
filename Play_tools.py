@@ -1,4 +1,5 @@
 import math
+from utils import string_modify, string_switch
 import string
 
 Cars_id = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
@@ -47,7 +48,8 @@ class Board:
         return self.side
 
     def set_board(self, _target, _vid):
-        self.board[_target] = _vid
+        # self.board[_target] = _vid
+        self.board = string_modify(self.board, _target, _vid)
 
     def check_point(self, _p):
         if (_p >= 0) and (_p < len(self.board)):
@@ -67,7 +69,7 @@ class Board:
         return self.board
 
     def update_board(self, _command):
-        self.get_vehicle(_command[0]).move(_command[1], int(_command[2])-int('0'))
+        self.get_vehicle(_command[37]).move(_command[38], int(_command[39])-int('0'))
 
 
 class Vehicle:
