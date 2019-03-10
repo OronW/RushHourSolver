@@ -7,7 +7,7 @@ Trucks_id = ["O", "P", "Q", "R"]
 
 class Board:
     def __init__(self, _cur_board):
-        self.board = _cur_board
+        self.board = str(_cur_board)
         self.side = int(math.sqrt(len(self.board)))
         self.VehicleHash = {}
 
@@ -28,12 +28,12 @@ class Board:
                 length = 3
 
             if (i + 1) % self.side != 0 and self.board[i] == self.board[i + 1]:
-                # horizonal
+                # horizontal
                 self.VehicleHash[self.board[i]] = Vehicle(self.board[i], 'H', length, i, self)
 
             if (i + self.side) < len(self.board) and self.board[i] == self.board[i + self.side]:
                 # vertical
-                self.VehicleHash[self.board[i]] = Vehicle(self.board[i], 'H', length, i, self)
+                self.VehicleHash[self.board[i]] = Vehicle(self.board[i], 'V', length, i, self)
 
     def is_target_empty(self, _target):
         if not self.check_point(_target):
@@ -57,14 +57,17 @@ class Board:
     def print_board(self):
         for r in range(self.side):
             for c in range(self.side):
-                print(self.board[r * self.side + c])
+                print(self.board[r * self.side + c], end='\t')
             print('\n')
 
     def get_vehicle(self, _id):
-        return self.VehicleHash[_id]
+        return self.VehicleHash.get(_id)
 
     def get_board(self):
         return self.board
+
+    def update_board(self, _command):
+        self.get_vehicle(_command[0]).move(_command[1], int(_command[2])-int('0'))
 
 
 class Vehicle:
@@ -129,7 +132,7 @@ class Vehicle:
                 old_pos = old_pos - self.board.get_board_side()
             self.top_left = target + self.board.get_board_side()
             self.bottom_right = old_pos
-            return
+            return self.board
 
         if _direction == 'D':
             target = self.bottom_right + (self.board.get_board_side())
@@ -141,7 +144,7 @@ class Vehicle:
                 old_pos = old_pos + self.board.get_board_side()
             self.bottom_right = target - self.board.get_board_side()
             self.top_left = old_pos
-            return
+            return self.board
 
         if _direction == 'L':
             target = self.top_left - 1
@@ -153,7 +156,7 @@ class Vehicle:
                 old_pos = old_pos - 1
             self.top_left = target + 1
             self.bottom_right = old_pos
-            return
+            return self.board
 
         if _direction == 'R':
             target = self.bottom_right + 1
@@ -165,7 +168,7 @@ class Vehicle:
                 old_pos = old_pos + 1
             self.bottom_right = target - 1
             self.top_left = old_pos
-            return
+            return self.board
 
     def get_direction(self):
         return self.direction
