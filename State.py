@@ -7,6 +7,12 @@ class State:
     def __init__(self, _board_obj):
         self.board_state = _board_obj
 
+    def get_string_board(self):
+        return self.board_state.get_board()
+
+    def get_board(self):
+        return self.board_state
+
     def find_next_steps(self):
         board = self.board_state.get_board()
         side = int(math.sqrt(len(board)))
@@ -39,8 +45,6 @@ class State:
                     j += 1
 
                 p = i + j  # set p as position on board
-                if p < len(board):
-                    v_id = board[p]
                 if (p >= len(board)) or \
                         ((board[p] != '.') and
                          (self.board_state.get_vehicle(board[p]).get_direction() == 'V')):  # check if vertical
@@ -85,8 +89,6 @@ class State:
                     j += side
                 j += side
                 p = i + j  # set p as position on board
-                if p < len(board):
-                    v_id = board[p]
 
                 if (p >= len(board)) or \
                         ((board[p] != '.') and
@@ -106,4 +108,57 @@ class State:
                 j += side
 
         return next_states
+
+    ############### change######################################
+    def isFree(self, _vehicle):
+        result = False
+        x = _vehicle.top_left % 6
+        y = int(_vehicle.top_left / 6)
+        size = _vehicle.get_length()
+
+        # CASE 1 : size 2 car can move one square up
+        if (x==1 and size==2 and self.get_string_board()[0][y]=='.'):
+            #print("Case 1")
+            result = True
+
+        # CASE 2 : Car blocking from above (x is 0,1,2), need to go down
+        elif (x<3):
+            #print("Case 2")
+            #count free squares below
+            freeblocks=0
+            nextX = x+size
+            while(nextX<6):
+                if (self.get_string_board()[nextX][y]=='.'):
+                    freeblocks+=1
+                nextX+=1
+
+            # if car can clear the path, result is true
+            if (freeblocks>=size):
+                result=True
+
+        #CASE 3 : Car not blocking the path
+        else:
+            #print("Case 3")
+            result=True
+
+        return result
+
+    def isGoalState(self):
+        goalcar = self.board_state.get_vehicle('X')
+        x = goalcar.top_left % 6
+        y = int(goalcar.top_left / 6)
+        y=y+goalcar.get_length()
+
+        for i in range (y,6):
+            if (not self.get_string_board()[x*6+i]=='.'):
+                return False
+
+        return True
+
+    def doMove(self, move):
+        if (not isinstance(move, list)) or len(move)!=5:
+            print("doMove: ",move," invalid move. expected list of length 5")
+
+        result = self.board_state.update_board(move)
+        # self.BF = self.getMovesCount()
 
