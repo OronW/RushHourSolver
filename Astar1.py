@@ -70,13 +70,6 @@ class Astar:
                 l.pop(i)
                 return
 
-
-
-
-
-
-
-
     def solveHeap(self, max_time, H, printStats):
 
         if (H == 1):
@@ -240,7 +233,7 @@ class Astar:
     # this heuristic returns number of blocking cars
     def H1(self, state):
         h=0
-        goalcar = state.game.findcar('X')
+        goalcar = state.get_board().get_vehicle('X')
         x=goalcar.x
         y=goalcar.y
         #print("X at: ",x ,",",y)
@@ -256,7 +249,7 @@ class Astar:
 
     def H2(self, state):
         h = 0
-        goalcar = state.game.findcar('X')
+        goalcar = state.get_board().get_vehicle('X')
         x = goalcar.x
         y = goalcar.y
         y = y + goalcar.size
@@ -264,7 +257,7 @@ class Astar:
         for i in range(y, 6):
             c = state.game.board[x][i]
             if (c != '.'):
-                blocking_car = state.game.findcar(c)
+                blocking_car = state.get_board().get_vehicle(c)
                 h += blocking_car.size
 
 
