@@ -2,7 +2,7 @@ import math
 from utils import string_modify, string_switch
 import string
 
-Cars_id = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"]
+Cars_id = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "X"]
 Trucks_id = ["O", "P", "Q", "R"]
 
 
@@ -21,11 +21,11 @@ class Board:
                 continue
 
             if self.board[i] in Cars_id:
-                # it is acar -> length 2
+                # it is a car -> length 2
                 length = 2
 
             if self.board[i] in Trucks_id:
-                # it is acar -> length 3
+                # it is a truck -> length 3
                 length = 3
 
             if (i + 1) % self.side != 0 and self.board[i] == self.board[i + 1]:
@@ -69,7 +69,7 @@ class Board:
         return self.board
 
     def update_board(self, _command):
-        self.get_vehicle(_command[37]).move(_command[38], int(_command[39])-int('0'))
+        self.get_vehicle(_command[0]).move(_command[1], int(_command[2])-int('0'))
 
 
 class Vehicle:
@@ -80,9 +80,9 @@ class Vehicle:
         self.top_left = _pos
         self.board = _obj_board
         if self.direction == 'H':
-            self.bottom_right = self.top_left + self.length
+            self.bottom_right = self.top_left + self.length - 1
         else:
-            self.bottom_right = self.top_left + (self.length * self.board.get_board_side())
+            self.bottom_right = self.top_left + (self.length * self.board.get_board_side()) - self.board.get_board_side()
 
     def move_vehicle(self, _direction, _steps):
         if self.check_move_validity(_direction, _steps):
@@ -127,7 +127,7 @@ class Vehicle:
         if _direction == 'U':
             target = self.top_left - (self.board.get_board_side())
             old_pos = self.bottom_right
-            for step in range(1, _steps):
+            for step in range(0, _steps):
                 self.board.set_board(target, self.id)
                 self.board.set_board(old_pos, '.')
                 target = target - self.board.get_board_side()
@@ -139,7 +139,7 @@ class Vehicle:
         if _direction == 'D':
             target = self.bottom_right + (self.board.get_board_side())
             old_pos = self.top_left
-            for step in range(1, _steps):
+            for step in range(0, _steps):
                 self.board.set_board(target, self.id)
                 self.board.set_board(old_pos, '.')
                 target = target + self.board.get_board_side()
@@ -151,7 +151,7 @@ class Vehicle:
         if _direction == 'L':
             target = self.top_left - 1
             old_pos = self.bottom_right
-            for step in range(1, _steps):
+            for step in range(0, _steps):
                 self.board.set_board(target, self.id)
                 self.board.set_board(old_pos, '.')
                 target = target - 1
@@ -163,7 +163,7 @@ class Vehicle:
         if _direction == 'R':
             target = self.bottom_right + 1
             old_pos = self.top_left
-            for step in range(1, _steps):
+            for step in range(0, _steps):
                 self.board.set_board(target, self.id)
                 self.board.set_board(old_pos, '.')
                 target = target + 1

@@ -19,7 +19,7 @@ class State:
         next_states = []
 
         # check horizontal
-        for i in range(0, (len(board) - 1), side):  # run over rows
+        for i in range(0, (len(board)), side):  # run over rows
             j = 0
             while j < side:  # run over columns
                 p = i + j  # set p as position on board
@@ -41,13 +41,13 @@ class State:
                     steps += 1
                     next_states.append(temp_state + ',' + temp_state[p] + 'R' + str(steps))
                     p = p_next
-                    p_next += 10
+                    p_next += 1
                     j += 1
 
-                p = i + j  # set p as position on board
+                p = i+j  # set p as position on board
                 if (p >= len(board)) or \
-                        ((board[p] != '.') and
-                         (self.board_state.get_vehicle(board[p]).get_direction() == 'V')):  # check if vertical
+                        (board[p] == '.') or \
+                        (self.board_state.get_vehicle(board[p]).get_direction() == 'V'):  # check if vertical
                     j += 1
                     continue
                 # check left
@@ -63,7 +63,7 @@ class State:
                 j += 1
 
         # check vertical
-        for i in range(0, side-1, 1):  # run over columns
+        for i in range(0, side):  # run over columns
             j = 0
             while j < len(board):  # run over rows
                 p = i + j  # set p as position on board
@@ -87,12 +87,12 @@ class State:
                     p = p_next
                     p_next += side
                     j += side
-                j += side
-                p = i + j  # set p as position on board
+
+                p = i+j  # set p as position on board
 
                 if (p >= len(board)) or \
-                        ((board[p] != '.') and
-                         (self.board_state.get_vehicle(board[p]).get_direction() == 'H')):  # check if horizontal
+                        (board[p] == '.') or \
+                        (self.board_state.get_vehicle(board[p]).get_direction() == 'H'):  # check if horizontal
                     j += side
                     continue
                 # check up
@@ -112,12 +112,12 @@ class State:
     ############### change######################################
     def isFree(self, _vehicle):
         result = False
-        x = _vehicle.top_left % 6
-        y = int(_vehicle.top_left / 6)
+        x = int(_vehicle.top_left / 6)
+        y = _vehicle.top_left % 6
         size = _vehicle.get_length()
 
         # CASE 1 : size 2 car can move one square up
-        if (x==1 and size==2 and self.get_string_board()[0][y]=='.'):
+        if (x==1 and size==2 and self.get_string_board()[0*6+y]=='.'):
             #print("Case 1")
             result = True
 
@@ -128,7 +128,7 @@ class State:
             freeblocks=0
             nextX = x+size
             while(nextX<6):
-                if (self.get_string_board()[nextX][y]=='.'):
+                if (self.get_string_board()[nextX*6+y]=='.'):
                     freeblocks+=1
                 nextX+=1
 
@@ -144,10 +144,10 @@ class State:
         return result
 
     def isGoalState(self):
-        goalcar = self.board_state.get_vehicle('X')
-        x = goalcar.top_left % 6
-        y = int(goalcar.top_left / 6)
-        y=y+goalcar.get_length()
+        vehicle = self.board_state.get_vehicle('X')
+        x = int(vehicle.top_left / 6)
+        y = vehicle.top_left % 6
+        y=y+vehicle.get_length()
 
         for i in range (y,6):
             if (not self.get_string_board()[x*6+i]=='.'):
@@ -156,9 +156,14 @@ class State:
         return True
 
     def doMove(self, move):
-        if (not isinstance(move, list)) or len(move)!=5:
-            print("doMove: ",move," invalid move. expected list of length 5")
+        # if (not isinstance(move, list)) or len(move)!=3:
+        if len(move) != 3:
+            print("doMove: ",move," invalid move. expected list of length 3")
 
         result = self.board_state.update_board(move)
-        # self.BF = self.getMovesCount()
+        self.BF = self.getMovesCount()
+
+    def getMovesCount(self):
+        return len(self.find_next_steps())
+
 

@@ -249,34 +249,34 @@ def run():
     print("1: Get solutions")
     print("2: Get solve times")
     print("3: Get solution statistics")
-    opt = input()
-    opt = int(opt)
+    # opt = input()
+    # opt = int(opt)
     print("Choose an heuristic: (1/2/3)")
-    h = input()
-    h = int(h)
+    # h = input()
+    # h = int(h)
     t = defaultTime()
-    if (not isinstance(h, int)) or h < 0 or h > 3:
-        print("Invalid heuristic input")
-        return
+    # if (not isinstance(h, int)) or h < 0 or h > 3:
+    #     print("Invalid heuristic input")
+    #     return
 
 
-    if (opt==1):
+    # if (opt==1):
         #Solutions:
-        print("Solving with ",t," (default 16) Seconds limit...")
-        solveAll(t,h,True,False)
+    print("Solving with ",t," (default 16) Seconds limit...")
+    solveAll(t,3,True,False)
 
-    elif (opt==2):
-        #times
-        print("Solving with ", t, " (default 16) Seconds limit...")
-        solveAll(t, h, False, True)
-
-    elif (opt==3):
-        #statistics
-        print("Solving with ", t, " (default 16) Seconds limit...")
-        printAllStats(t, h)
-
-    else:
-        print("Invalid input")
+    # elif (opt==2):
+    #     #times
+    #     print("Solving with ", t, " (default 16) Seconds limit...")
+    #     solveAll(t, h, False, True)
+    #
+    # elif (opt==3):
+    #     #statistics
+    #     print("Solving with ", t, " (default 16) Seconds limit...")
+    #     printAllStats(t, h)
+    #
+    # else:
+    #     print("Invalid input")
 
 
 

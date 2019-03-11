@@ -84,8 +84,8 @@ class Astar:
         self.openPush(self.first_node)
         self.Open_dic.update({self.first_node.name: self.first_node.F})
 
-        while (self.Open) and (time()-start < max_time):
-
+        # while (self.Open) and (time()-start < max_time):
+        while self.Open:
             currentNode = self.openPop()
 
             #check if solved
@@ -130,14 +130,6 @@ class Astar:
 
         return result
 
-
-
-
-
-
-
-
-
     def expand(self, node, H):
         moves = node.moves
         n = len(moves)
@@ -154,7 +146,7 @@ class Astar:
             nextState = copy.deepcopy(currentState)
 
             #perform move [i]
-            nextState.doMove(moves[i])
+            nextState.doMove(moves[i][-3:])
             s = nextState.get_string_board()
 
             # Eval nextState
@@ -234,13 +226,13 @@ class Astar:
     def H1(self, state):
         h=0
         goalcar = state.get_board().get_vehicle('X')
-        x=goalcar.x
-        y=goalcar.y
-        #print("X at: ",x ,",",y)
-        y=y+goalcar.size
+        x = int(goalcar.top_left / 6)
+        y = goalcar.top_left % 6
+        y = y + goalcar.get_length()
+
 
         for i in range(y, 6):
-            if (state.game.board[x][i]!='.'):
+            if (state.get_string_board()[x*6+i]!='.'):
                 h+=1
 
         return h
@@ -250,12 +242,12 @@ class Astar:
     def H2(self, state):
         h = 0
         goalcar = state.get_board().get_vehicle('X')
-        x = goalcar.x
-        y = goalcar.y
-        y = y + goalcar.size
+        x = int(goalcar.top_left / 6)
+        y = goalcar.top_left % 6
+        y = y + goalcar.get_length()
 
         for i in range(y, 6):
-            c = state.game.board[x][i]
+            c = state.get_string_board()[x*6+i]
             if (c != '.'):
                 blocking_car = state.get_board().get_vehicle(c)
                 h += blocking_car.size
@@ -267,8 +259,8 @@ class Astar:
     def H3(self, state):
         h = 0
         goalcar = state.get_board().get_vehicle('X')
-        x = goalcar.top_left % 6
-        y = int(goalcar.top_left / 6)
+        x = int(goalcar.top_left / 6)
+        y = goalcar.top_left % 6
         y = y + goalcar.get_length()
         blocking_cars = []
 
@@ -279,7 +271,7 @@ class Astar:
                 h += 1
                 if (not state.isFree(car)):
                     # Car cannot clear the way, punish the heuristic
-                    h+=car.get_lenght()
+                    h+=car.get_length()
 
         return h
 
@@ -314,7 +306,7 @@ class Astar:
         solution=""
         i=self.path.__len__()-1
         while(i>0):
-            solution=self.move2str(self.path[i])+" "+solution
+            solution=path[i].previous_move[-3:]+" "+solution
             i-=1
 
         return solution
@@ -330,7 +322,7 @@ class Astar:
             node=node.parent
 
         for i in range(0,len(path)):
-            solution=self.move2str(path[i])+" "+solution
+            solution=path[i].previous_move[-3:]+" "+solution
 
         if (head == None):
             print("HEAD NONE")
@@ -368,8 +360,9 @@ class Astar:
 
 
     def lastMove(self, node):
-        return node.state.finalMove()
+        steps_to_end = 6 - (node.state.get_board().get_vehicle('X').bottom_right % 6)
 
+        return "XR" + str(steps_to_end)
     def getEBF(self):
         allNodes = self.Open + self.Close
         ebf=0

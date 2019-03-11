@@ -27,7 +27,7 @@ class Node:
         self.move_index=0
 
         # branch factor
-        self.BF = len(_state.find_next_steps())
+        self.BF = len(self.moves)
 
         #depth : how many moves to get this state
         self.depth = _depth
