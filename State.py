@@ -146,21 +146,21 @@ class State:
     def isGoalState(self):
         vehicle = self.board_state.get_vehicle('X')
         x = int(vehicle.top_left / 6)
-        y = vehicle.top_left % 6
-        y=y+vehicle.get_length()
+        y = (vehicle.top_left % 6) + vehicle.get_length()
+        # y=y+vehicle.get_length()
 
-        for i in range (y,6):
-            if (not self.get_string_board()[x*6+i]=='.'):
+        for i in range(y, 6):
+            if not self.get_string_board()[x*6+i] == '.':
                 return False
 
         return True
 
-    def doMove(self, move):
+    def run_command(self, _command):
         # if (not isinstance(move, list)) or len(move)!=3:
         if len(move) != 3:
-            print("doMove: ",move," invalid move. expected list of length 3")
+            print("run_command: ", _command, " invalid move. expected list of length 3")
 
-        result = self.board_state.update_board(move)
+        result = self.board_state.update_board(_command)
         self.BF = self.getMovesCount()
 
     def getMovesCount(self):

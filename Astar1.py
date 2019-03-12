@@ -1,8 +1,7 @@
 from State import State
 import copy
 import math
-from Node1\
-    import Node
+from Node1 import Node
 from heapq import heappop as pop
 from heapq import heappush as push
 from time import time
@@ -146,7 +145,7 @@ class Astar:
             nextState = copy.deepcopy(currentState)
 
             #perform move [i]
-            nextState.doMove(moves[i][-3:])
+            nextState.run_command(moves[i][-3:])
             s = nextState.get_string_board()
 
             # Eval nextState
