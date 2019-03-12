@@ -109,7 +109,64 @@ class State:
 
         return next_states
 
+    ############changed###############
+
+    def final_move(self):
+        vehicle = self.board_state.get_vehicle('X')
+        start_point = vehicle.top_left + vehicle.get_length()
+        steps_to_end = 6 - ((vehicle.top_left + vehicle.get_length()) % 6)
+
+        for i in range(0, steps_to_end):
+            if self.get_string_board()[start_point+i] != '.':
+                return False
+
+        return True
+
+    def run_command(self, _command):
+        if len(_command) != 3:
+            print("-E- Wrong command length")
+
+        self.board_state.update_board(_command)
+        self.BF = len(self.find_next_steps())
+
     ############### change######################################
+    def isFree(self, _vehicle):
+        # result = False
+        # x = int(_vehicle.top_left / 6)
+        # y = _vehicle.top_left % 6
+        # size = _vehicle.get_length()
+        board_size = self.get_board().side
+
+        # CASE 1 : size 2 car can move one square up
+        ####################   if (int(_vehicle.top_left / 6) == 1) and \ -> if (int(_vehicle.top_left / 6) == 0) and \
+        # (self.get_string_board()[_vehicle.top_left] == '.'):
+        if (int(_vehicle.top_left / board_size) == 0) and \
+                (_vehicle.get_length() == 2) and \
+                (self.get_string_board()[_vehicle.top_left] == '.'):
+            #print("Case 1")
+            return True
+
+        # CASE 2 : Car blocking from above (x is 0,1,2), need to go down
+        elif int(_vehicle.top_left / board_size) < 3:
+            #print("Case 2")
+            #count free squares below
+            shift = _vehicle.get_length() * self.get_board().side
+            new_position = _vehicle.top_left + shift
+            counter = 0
+            while int(new_position / board_size) < board_size:
+                if self.get_string_board()[new_position] == '.':
+                    counter += 1
+                new_position += shift
+
+            # if car can clear the path, result is true
+            if counter >= _vehicle.get_length():
+                return True
+
+        #CASE 3 : Car not blocking the path
+        return True
+
+
+"""""
     def isFree(self, _vehicle):
         result = False
         x = int(_vehicle.top_left / 6)
@@ -143,14 +200,15 @@ class State:
 
         return result
 
-    def isGoalState(self):
+    def final_move(self):
         vehicle = self.board_state.get_vehicle('X')
-        x = int(vehicle.top_left / 6)
-        y = (vehicle.top_left % 6) + vehicle.get_length()
+        # x = int(vehicle.top_left / 6)
+        start_point = vehicle.top_left + vehicle.get_length()
         # y=y+vehicle.get_length()
+        steps_to_end = 6 - ((vehicle.top_left + vehicle.get_length()) % 6)
 
-        for i in range(y, 6):
-            if not self.get_string_board()[x*6+i] == '.':
+        for i in range(0, steps_to_end):
+            if self.get_string_board()[start_point+i] != '.':
                 return False
 
         return True
@@ -161,9 +219,10 @@ class State:
             print("run_command: ", _command, " invalid move. expected list of length 3")
 
         self.board_state.update_board(_command)
-        self.BF = self.getMovesCount()
+        # self.BF = self.getMovesCount()
+        self.BF = len(self.find_next_steps())
 
     def getMovesCount(self):
         return len(self.find_next_steps())
-
+"""
 
