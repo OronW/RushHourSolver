@@ -157,10 +157,10 @@ class State:
 
     def run_command(self, _command):
         # if (not isinstance(move, list)) or len(move)!=3:
-        if len(move) != 3:
+        if len(_command) != 3:
             print("run_command: ", _command, " invalid move. expected list of length 3")
 
-        result = self.board_state.update_board(_command)
+        self.board_state.update_board(_command)
         self.BF = self.getMovesCount()
 
     def getMovesCount(self):
