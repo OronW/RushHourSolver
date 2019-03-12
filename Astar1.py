@@ -221,8 +221,8 @@ class Astar:
 
 
 
-    # this heuristic returns number of blocking cars
-    def H1(self, state):
+
+    def H1(self, state):     # Heuristic returns the number of blocked squares in path of red car
         h=0
         goalcar = state.get_board().get_vehicle('X')
         x = int(goalcar.top_left / 6)
@@ -238,7 +238,7 @@ class Astar:
 
 
 
-    def H2(self, state):
+    def H2(self, state):    # Heuristic returns the number of blocked squares in path of red car + sizes of blocking cars
         h = 0
         goalcar = state.get_board().get_vehicle('X')
         x = int(goalcar.top_left / 6)
@@ -249,7 +249,7 @@ class Astar:
             c = state.get_string_board()[x*6+i]
             if (c != '.'):
                 blocking_car = state.get_board().get_vehicle(c)
-                h += blocking_car.size
+                h += blocking_car.size + 1
 
 
         return h
