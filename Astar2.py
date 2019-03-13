@@ -89,7 +89,7 @@ class Astar:
             currentNode = self.openPop()
 
             #check if solved
-            if(currentNode.state.isGoalState()):
+            if(currentNode.state.final_move()):
                 #DONE:
                 end = time()
                 t = end - start
@@ -146,7 +146,7 @@ class Astar:
             nextState = copy.deepcopy(currentState)
 
             #perform move [i]
-            nextState.doMove(moves[i][-3:])
+            nextState.run_command(moves[i][-3:])
             s = nextState.get_string_board()
 
             # Eval nextState
@@ -241,21 +241,32 @@ class Astar:
 
     def H2(self, state):    # this heuristic returns the number of blocked squares for the red car + blocking car sizes
         h = 0
-        goalcar = state.get_board().get_vehicle('X')
-        x = int(goalcar.top_left / 6)
-        y = goalcar.top_left % 6
-        y = y + goalcar.get_length()
+        # goalcar = state.get_board().get_vehicle('X')
+        # x = int(goalcar.top_left / 6)
+        # y = goalcar.top_left % 6
+        # y = y + goalcar.get_length()
+        #
+        # for i in range(y, 6):
+        #     c = state.get_string_board()[x*6+i]
+        #     if (c != '.'):
+        #         blocking_car = state.get_board().get_vehicle(c)
+        #         h += blocking_car.get_length() + 1
+        #
+        #
+        # return h
 
-        for i in range(y, 6):
-            c = state.get_string_board()[x*6+i]
-            if (c != '.'):
-                blocking_car = state.get_board().get_vehicle(c)
-                h += blocking_car.get_length() + 1
+        vehicle = self.board_state.get_vehicle('X')
+        start_point = vehicle.top_left + vehicle.get_length()
+        steps_to_end = 6 - ((vehicle.top_left + vehicle.get_length()) % 6)
 
+        for i in range(0, steps_to_end):
+            c = state.get_string_board()[start_point + i]
+            if c != '.':
+                blocking_vehicle = state.get_board().get_vehicle(c)
+                h += blocking_vehicle.get_length() + 1
 
         return h
 
-    """
     def H3(self, state):
         h = 0
         goalcar = state.get_board().get_vehicle('X')
@@ -274,7 +285,7 @@ class Astar:
                     h+=car.get_length()
 
         return h
-    """
+
 
    # given string s of a state,
     def isNewState(self, state):
@@ -299,7 +310,7 @@ class Astar:
 
 
     def goalState(self, node):
-        return node.state.isGoalState()
+        return node.state.final_move()
 
 
     def printSolution(self):
