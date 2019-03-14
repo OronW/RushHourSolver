@@ -1,0 +1,360 @@
+puzzle number - 1
+Solved\Failed: Solved
+Solution time (Sec):  0.4838430881500244
+Branching Factor:  11.423572744014733
+Heuristic Estimation:  6.688766114180479
+(d/N):  0.01289134438305709
+Searched Nodes:  543
+Minimum depth:  1  Average Depth:  4.817948717948718 Max Depth:  7
+--------------------------------------------------------------------
+puzzle number - 2
+Solved\Failed: Solved
+Solution time (Sec):  0.2899050712585449
+Branching Factor:  9.853403141361257
+Heuristic Estimation:  6.630890052356021
+(d/N):  0.020942408376963352
+Searched Nodes:  382
+Minimum depth:  1  Average Depth:  5.559027777777778 Max Depth:  8
+--------------------------------------------------------------------
+puzzle number - 3
+Solved\Failed: Solved
+Solution time (Sec):  0.9358830451965332
+Branching Factor:  9.318661971830986
+Heuristic Estimation:  6.605633802816901
+(d/N):  0.02464788732394366
+Searched Nodes:  568
+Minimum depth:  10  Average Depth:  12.343137254901961 Max Depth:  14
+--------------------------------------------------------------------
+puzzle number - 4
+Solved\Failed: Solved
+Solution time (Sec):  0.16294622421264648
+Branching Factor:  9.699507389162562
+Heuristic Estimation:  5.167487684729064
+(d/N):  0.03940886699507389
+Searched Nodes:  203
+Minimum depth:  4  Average Depth:  7.0625 Max Depth:  8
+--------------------------------------------------------------------
+puzzle number - 5
+Solved\Failed: Solved
+Solution time (Sec):  0.41086626052856445
+Branching Factor:  10.938095238095238
+Heuristic Estimation:  7.690476190476191
+(d/N):  0.02142857142857143
+Searched Nodes:  420
+Minimum depth:  1  Average Depth:  6.391167192429022 Max Depth:  9
+--------------------------------------------------------------------
+puzzle number - 6
+Solved\Failed: Solved
+Solution time (Sec):  0.19593548774719238
+Branching Factor:  10.678571428571429
+Heuristic Estimation:  9.424603174603174
+(d/N):  0.03571428571428571
+Searched Nodes:  252
+Minimum depth:  1  Average Depth:  5.079207920792079 Max Depth:  9
+--------------------------------------------------------------------
+puzzle number - 7
+Solved\Failed: Solved
+Solution time (Sec):  5.536819696426392
+Branching Factor:  10.914940502423976
+Heuristic Estimation:  5.781842221242838
+(d/N):  0.005288673424416042
+Searched Nodes:  2269
+Minimum depth:  4  Average Depth:  9.370741482965931 Max Depth:  12
+--------------------------------------------------------------------
+puzzle number - 8
+Solved\Failed: Solved
+Solution time (Sec):  0.6665644645690918
+Branching Factor:  7.281947261663286
+Heuristic Estimation:  7.04868154158215
+(d/N):  0.02231237322515213
+Searched Nodes:  493
+Minimum depth:  1  Average Depth:  7.36231884057971 Max Depth:  11
+--------------------------------------------------------------------
+puzzle number - 9
+Solved\Failed: Solved
+Solution time (Sec):  0.4928412437438965
+Branching Factor:  8.46095717884131
+Heuristic Estimation:  4.594458438287154
+(d/N):  0.027707808564231738
+Searched Nodes:  397
+Minimum depth:  3  Average Depth:  9.48068669527897 Max Depth:  11
+--------------------------------------------------------------------
+puzzle number - 10
+Solved\Failed: Solved
+Solution time (Sec):  4.163823127746582
+Branching Factor:  8.587707182320441
+Heuristic Estimation:  4.246546961325967
+(d/N):  0.011049723756906077
+Searched Nodes:  1448
+Minimum depth:  12  Average Depth:  14.393617021276595 Max Depth:  16
+--------------------------------------------------------------------
+puzzle number - 11
+Solved\Failed: Solved
+Solution time (Sec):  1.467637062072754
+Branching Factor:  8.283333333333333
+Heuristic Estimation:  5.884615384615385
+(d/N):  0.03205128205128205
+Searched Nodes:  780
+Minimum depth:  19  Average Depth:  22.63478260869565 Max Depth:  25
+--------------------------------------------------------------------
+puzzle number - 12
+Solved\Failed: Solved
+Solution time (Sec):  1.3128771781921387
+Branching Factor:  9.1741214057508
+Heuristic Estimation:  6.800319488817891
+(d/N):  0.025559105431309903
+Searched Nodes:  626
+Minimum depth:  7  Average Depth:  12.752380952380953 Max Depth:  16
+--------------------------------------------------------------------
+puzzle number - 13
+Solved\Failed: Solved
+Solution time (Sec):  7.463571071624756
+Branching Factor:  8.646337629676202
+Heuristic Estimation:  6.9924552027664255
+(d/N):  0.00534423137378183
+Searched Nodes:  3181
+Minimum depth:  8  Average Depth:  11.587058823529413 Max Depth:  17
+--------------------------------------------------------------------
+puzzle number - 14
+Solved\Failed: Failed
+Solution time (Sec):  13.00197458267212
+Branching Factor:  10.888268156424582
+Heuristic Estimation:  4.903786468032278
+(d/N):  0.0037243947858473
+Searched Nodes:  4833
+Minimum depth:  10  Average Depth:  15.234735413839891 Max Depth:  18
+--------------------------------------------------------------------
+puzzle number - 15
+Solved\Failed: Solved
+Solution time (Sec):  1.1727893352508545
+Branching Factor:  6.1160541586073505
+Heuristic Estimation:  10.429400386847195
+(d/N):  0.04642166344294004
+Searched Nodes:  517
+Minimum depth:  14  Average Depth:  15.193548387096774 Max Depth:  24
+--------------------------------------------------------------------
+puzzle number - 16
+Solved\Failed: Solved
+Solution time (Sec):  5.45451545715332
+Branching Factor:  9.320038910505836
+Heuristic Estimation:  6.690175097276264
+(d/N):  0.009727626459143969
+Searched Nodes:  2056
+Minimum depth:  10  Average Depth:  18.07070707070707 Max Depth:  20
+--------------------------------------------------------------------
+puzzle number - 17
+Solved\Failed: Solved
+Solution time (Sec):  3.6188347339630127
+Branching Factor:  9.277013752455796
+Heuristic Estimation:  8.75638506876228
+(d/N):  0.016371971185330715
+Searched Nodes:  1527
+Minimum depth:  14  Average Depth:  19.529274004683842 Max Depth:  25
+--------------------------------------------------------------------
+puzzle number - 18
+Solved\Failed: Solved
+Solution time (Sec):  3.1206130981445312
+Branching Factor:  8.792945787067277
+Heuristic Estimation:  4.634879163945134
+(d/N):  0.015676028739386023
+Searched Nodes:  1531
+Minimum depth:  19  Average Depth:  22.763803680981596 Max Depth:  24
+--------------------------------------------------------------------
+puzzle number - 19
+Solved\Failed: Solved
+Solution time (Sec):  0.8728077411651611
+Branching Factor:  7.373134328358209
+Heuristic Estimation:  3.8699360341151388
+(d/N):  0.04477611940298507
+Searched Nodes:  469
+Minimum depth:  17  Average Depth:  18.73076923076923 Max Depth:  21
+--------------------------------------------------------------------
+puzzle number - 20
+Solved\Failed: Solved
+Solution time (Sec):  1.1982026100158691
+Branching Factor:  8.911494252873563
+Heuristic Estimation:  5.7172413793103445
+(d/N):  0.01264367816091954
+Searched Nodes:  870
+Minimum depth:  3  Average Depth:  8.63677130044843 Max Depth:  11
+--------------------------------------------------------------------
+puzzle number - 21
+Solved\Failed: Solved
+Solution time (Sec):  0.3538820743560791
+Branching Factor:  6.590909090909091
+Heuristic Estimation:  4.446280991735537
+(d/N):  0.08264462809917356
+Searched Nodes:  242
+Minimum depth:  16  Average Depth:  18.4 Max Depth:  20
+--------------------------------------------------------------------
+puzzle number - 22
+Solved\Failed: Solved
+Solution time (Sec):  5.935503244400024
+Branching Factor:  8.932144106330885
+Heuristic Estimation:  5.755508919202518
+(d/N):  0.008744316194473592
+Searched Nodes:  2859
+Minimum depth:  19  Average Depth:  23.39646201873049 Max Depth:  25
+--------------------------------------------------------------------
+puzzle number - 23
+Solved\Failed: Solved
+Solution time (Sec):  2.6983115673065186
+Branching Factor:  8.072972972972973
+Heuristic Estimation:  7.578378378378378
+(d/N):  0.02027027027027027
+Searched Nodes:  1480
+Minimum depth:  21  Average Depth:  25.158854166666668 Max Depth:  30
+--------------------------------------------------------------------
+puzzle number - 24
+Solved\Failed: Solved
+Solution time (Sec):  12.893465042114258
+Branching Factor:  10.668624571708271
+Heuristic Estimation:  3.6505139500734214
+(d/N):  0.005873715124816446
+Searched Nodes:  4086
+Minimum depth:  19  Average Depth:  22.406698564593302 Max Depth:  24
+--------------------------------------------------------------------
+puzzle number - 25
+Solved\Failed: Failed
+Solution time (Sec):  13.000710248947144
+Branching Factor:  9.588843378193875
+Heuristic Estimation:  7.537351277550225
+(d/N):  0.004876145894285157
+Searched Nodes:  5127
+Minimum depth:  17  Average Depth:  20.42726679712981 Max Depth:  25
+--------------------------------------------------------------------
+puzzle number - 26
+Solved\Failed: Solved
+Solution time (Sec):  10.300786972045898
+Branching Factor:  8.584139784946236
+Heuristic Estimation:  7.294354838709677
+(d/N):  0.007258064516129033
+Searched Nodes:  3720
+Minimum depth:  18  Average Depth:  21.391509433962263 Max Depth:  27
+--------------------------------------------------------------------
+puzzle number - 27
+Solved\Failed: Solved
+Solution time (Sec):  5.406703948974609
+Branching Factor:  7.766233766233766
+Heuristic Estimation:  8.713892168437622
+(d/N):  0.011412829594647777
+Searched Nodes:  2541
+Minimum depth:  19  Average Depth:  23.793478260869566 Max Depth:  29
+--------------------------------------------------------------------
+puzzle number - 28
+Solved\Failed: Solved
+Solution time (Sec):  1.5273473262786865
+Branching Factor:  7.780341023069208
+Heuristic Estimation:  7.736208625877633
+(d/N):  0.03009027081243731
+Searched Nodes:  997
+Minimum depth:  21  Average Depth:  26.07398568019093 Max Depth:  30
+--------------------------------------------------------------------
+puzzle number - 29
+Solved\Failed: Solved
+Solution time (Sec):  11.314754724502563
+Branching Factor:  8.793376865671641
+Heuristic Estimation:  9.691930970149254
+(d/N):  0.0072294776119402986
+Searched Nodes:  4288
+Minimum depth:  19  Average Depth:  23.778200253485423 Max Depth:  31
+--------------------------------------------------------------------
+puzzle number - 30
+Solved\Failed: Solved
+Solution time (Sec):  2.0694847106933594
+Branching Factor:  7.38894472361809
+Heuristic Estimation:  4.996984924623115
+(d/N):  0.031155778894472363
+Searched Nodes:  995
+Minimum depth:  26  Average Depth:  28.666666666666668 Max Depth:  31
+--------------------------------------------------------------------
+puzzle number - 31
+Solved\Failed: Solved
+Solution time (Sec):  10.431472301483154
+Branching Factor:  8.287477028091363
+Heuristic Estimation:  8.158571803622998
+(d/N):  0.009451299553688633
+Searched Nodes:  3809
+Minimum depth:  30  Average Depth:  33.32743362831859 Max Depth:  36
+--------------------------------------------------------------------
+puzzle number - 32
+Solved\Failed: Solved
+Solution time (Sec):  0.8767154216766357
+Branching Factor:  5.605210420841684
+Heuristic Estimation:  8.294589178356713
+(d/N):  0.07214428857715431
+Searched Nodes:  499
+Minimum depth:  30  Average Depth:  33.65384615384615 Max Depth:  36
+--------------------------------------------------------------------
+puzzle number - 33
+Solved\Failed: Solved
+Solution time (Sec):  5.387591123580933
+Branching Factor:  8.10717749757517
+Heuristic Estimation:  9.937439379243452
+(d/N):  0.018913676042677012
+Searched Nodes:  2062
+Minimum depth:  31  Average Depth:  34.13574660633484 Max Depth:  39
+--------------------------------------------------------------------
+puzzle number - 34
+Solved\Failed: Solved
+Solution time (Sec):  10.678531408309937
+Branching Factor:  8.48058608058608
+Heuristic Estimation:  9.447863247863248
+(d/N):  0.010256410256410256
+Searched Nodes:  4095
+Minimum depth:  30  Average Depth:  37.34055118110236 Max Depth:  42
+--------------------------------------------------------------------
+puzzle number - 35
+Solved\Failed: Solved
+Solution time (Sec):  11.964892387390137
+Branching Factor:  8.963552980931691
+Heuristic Estimation:  10.158339367608013
+(d/N):  0.010137581462708182
+Searched Nodes:  4143
+Minimum depth:  28  Average Depth:  32.7695652173913 Max Depth:  42
+--------------------------------------------------------------------
+puzzle number - 36
+Solved\Failed: Solved
+Solution time (Sec):  5.745757341384888
+Branching Factor:  8.701291711517761
+Heuristic Estimation:  4.174381054897739
+(d/N):  0.023143164693218515
+Searched Nodes:  1858
+Minimum depth:  38  Average Depth:  41.109756097560975 Max Depth:  43
+--------------------------------------------------------------------
+puzzle number - 37
+Solved\Failed: Solved
+Solution time (Sec):  2.828272819519043
+Branching Factor:  7.486334968465312
+Heuristic Estimation:  9.649614576033636
+(d/N):  0.032936229852838124
+Searched Nodes:  1427
+Minimum depth:  36  Average Depth:  41.140449438202246 Max Depth:  47
+--------------------------------------------------------------------
+puzzle number - 38
+Solved\Failed: Solved
+Solution time (Sec):  8.155041933059692
+Branching Factor:  7.6369065392654525
+Heuristic Estimation:  7.330845028366677
+(d/N):  0.014631233203941475
+Searched Nodes:  3349
+Minimum depth:  40  Average Depth:  45.27906976744186 Max Depth:  49
+--------------------------------------------------------------------
+puzzle number - 39
+Solved\Failed: Solved
+Solution time (Sec):  9.252103090286255
+Branching Factor:  6.912997627208015
+Heuristic Estimation:  6.86580543105721
+(d/N):  0.012918534141840231
+Searched Nodes:  3793
+Minimum depth:  44  Average Depth:  46.01754385964912 Max Depth:  49
+--------------------------------------------------------------------
+puzzle number - 40
+Solved\Failed: Solved
+Solution time (Sec):  7.862554311752319
+Branching Factor:  8.121893888515782
+Heuristic Estimation:  6.190732034922767
+(d/N):  0.0167897918065816
+Searched Nodes:  2978
+Minimum depth:  40  Average Depth:  47.90417690417691 Max Depth:  50
+--------------------------------------------------------------------
