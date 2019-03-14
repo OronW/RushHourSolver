@@ -50,9 +50,9 @@ class Astar:
     def solve(self, max_time, _heuristic, DB):
 
         if _heuristic == 1:
-            self.first_node.F = self.H1(self.first_node.state)
+            self.first_node.F = self.heuristic1(self.first_node.state)
         else:
-            self.first_node.F = self.H2(self.first_node.state)
+            self.first_node.F = self.heuristic2(self.first_node.state)
 
         start = time()
         flag = 0
@@ -69,7 +69,7 @@ class Astar:
                 while True:
                     self.close_push(currentNode)
                     self.Close_dic.update({currentNode.name: currentNode.F})
-                    self.expand_from_DB(currentNode, H, res)
+                    self.expand_from_DB(currentNode, _heuristic, res)
                     currentNode = self.open_pop()
                     res = DB.get_next(currentNode.state)
                     if res == 1:
@@ -120,9 +120,9 @@ class Astar:
 
             # Eval next_state
             if _heuristic == 1:
-                h = self.H1(next_state)
+                h = self.heuristic1(next_state)
             else:
-                h = self.H2(next_state)
+                h = self.heuristic2(next_state)
 
             f = h + depth + 1
 
@@ -197,10 +197,10 @@ class Astar:
         s = next_state.get_string_board()
 
         # Eval next_state
-        if (_heuristic == 1):
-            h = self.h(next_state)
+        if _heuristic == 1:
+            h = self.heuristic1(next_state)
         else:
-            h = self.H2(next_state)
+            h = self.heuristic2(next_state)
 
         f = h + depth + 1
 
@@ -218,7 +218,7 @@ class Astar:
 
         return True
 
-    def H1(self, state):  # this heuristic returns the number of blocked squares for the red car
+    def heuristic1(self, state):  # this heuristic returns the number of blocked squares for the red car
         h = 0
         goalcar = state.get_board().get_vehicle('X')
         x = int(goalcar.top_left / 6)
@@ -226,12 +226,12 @@ class Astar:
         y = y + goalcar.get_length()
 
         for i in range(y, 6):
-            if (state.get_string_board()[x * 6 + i] != '.'):
+            if state.get_string_board()[x * 6 + i] != '.':
                 h += 1
 
         return h
 
-    def H2(self, _state):  # this heuristic returns the number of blocked squares for the red car + blocking car sizes
+    def heuristic2(self, _state):  # this heuristic returns the number of blocked squares for the red car + blocking car sizes
         h = 0
 
         vehicle = _state.get_board().get_vehicle('X')
@@ -247,17 +247,17 @@ class Astar:
         return h
 
     # given string s of a state,
-    def isNewState(self, state):
-        s = state.boardToString()
-        if (s in self.d):
-            return False
-        else:
-            return True
+    # def isNewState(self, state):
+    #     s = state.boardToString()
+    #     if (s in self.d):
+    #         return False
+    #     else:
+    #         return True
 
     def updateDict(self, obj, key):
-        if (type(obj) is State):
+        if type(obj) is State:
             s = obj.boardToString()
-        elif (type(obj) is Node):
+        elif type(obj) is Node:
             s = obj.state.boardToString()
         else:
             # unknown obj type
@@ -267,14 +267,14 @@ class Astar:
         self.d.update({s: key})
         self.state_id += 1
 
-    def goalState(self, node):
-        return node.state.final_move()
+    # def goalState(self, node):
+    #     return node.state.final_move()
 
     def printSolution(self):
         solution = ""
         i = self.path.__len__() - 1
-        while (i > 0):
-            solution = path[i].previous_move[-3:] + " " + solution
+        while i > 0:
+            solution = self.path[i].previous_move[-3:] + " " + solution
             i -= 1
 
         return solution
@@ -286,7 +286,8 @@ class Astar:
         path = []
         if _flag == 0:
             next_move = self.lastMove(head)
-        while node.parent != None:
+
+        while node.parent is not None:
             if _flag == 0:
                 _DB.set_next(node.state, next_move)
                 next_move = node.previous_move[-3:]
@@ -300,7 +301,7 @@ class Astar:
         for i in range(0, len(path)):
             solution = path[i].previous_move[-3:] + " " + solution
 
-        if (head == None):
+        if head is None:
             print("HEAD NONE")
 
         if _flag == 0:
@@ -308,86 +309,62 @@ class Astar:
 
         return solution
 
-    # def move2str(self, node):
-    #     m = node.previous_move
-    #     car = m[4]
-    #     dir = ""
-    #     amount = max(abs(m[2]), abs(m[3]))
-    #
-    #     # Horizontal movement
-    #     if (m[2] > 0):
-    #         dir = 'R'
-    #     elif (m[2] < 0):
-    #         dir = 'L'
-    #
-    #     # Vertical movement
-    #     elif (m[3] > 0):
-    #         dir = 'D'
-    #     elif (m[3] < 0):
-    #         dir = 'U'
-    #
-    #     else:
-    #         print("move2str: invalid move")
-    #         return None
-    #
-    #     return car + dir + str(amount)
-
     def lastMove(self, node):
         steps_to_end = 6 - (node.state.get_board().get_vehicle('X').bottom_right % 6)
 
         return "XR" + str(steps_to_end + 1)
 
-    def getEBF(self):
-        allNodes = self.Open + self.Close
-        ebf = 0
-        n = len(allNodes)
-        for i in range(0, n):
-            ebf += allNodes[i][1].BF
+    # def getEBF(self):
+    #     nodes = self.Open + self.Close
+    #     ebf = 0
+    #     n = len(nodes)
+    #     for i in range(0, n):
+    #         ebf += nodes[i][1].BF
+    #
+    #     return ebf / n
 
-        return ebf / n
+    # def get_depth(self):
+    #     nodes = self.Open
+    #     n = len(nodes)
+    #     min = math.inf
+    #     max = 0
+    #     avg = 0
+    #
+    #     for i in range(0, n):
+    #         d = nodes[i][1].depth
+    #         if d < min:
+    #             min = d
+    #         if d > max:
+    #             max = d
+    #         avg += d
+    #
+    #     avg = avg / n
+    #     return [min, avg, max]
 
-    def getTreeDepth(self):
-        treeNodes = self.Open
-        n = len(treeNodes)
-        min = math.inf
-        max = 0
-        avg = 0
+    # def getHeuristicAverage(self):
+    #     nodes = self.Open + self.Close
+    #     h = 0
+    #     n = len(nodes)
+    #     for i in range(0, n):
+    #         h += nodes[i][1].F - nodes[i][1].depth
+    #
+    #     return h / n
 
-        for i in range(0, n):
-            d = treeNodes[i][1].depth
-            if (d < min):
-                min = d
-            if (d > max):
-                max = d
-            avg += d
+    # def getDepthRatio(self):
+    #     nodes = self.Open
+    #     n = len(nodes)
+    #     max_depth = 0
+    #     N = n + len(self.Close)
+    #
+    #     for i in range(0, n):
+    #         d = nodes[i][1].depth
+    #         if d > max_depth:
+    #             max_depth = d
+    #
+    #     return max_depth / N
 
-        avg = avg / n
-        return [min, avg, max]
-
-    def getHeuristicAverage(self):
-        allNodes = self.Open + self.Close
-        h = 0
-        n = len(allNodes)
-        for i in range(0, n):
-            h += allNodes[i][1].F - allNodes[i][1].depth
-
-        return h / n
-
-    def getDepthRatio(self):
-        treeNodes = self.Open
-        n = len(treeNodes)
-        max_depth = 0
-        N = n + len(self.Close)
-
-        for i in range(0, n):
-            d = treeNodes[i][1].depth
-            if (d > max_depth):
-                max_depth = d
-
-        return max_depth / N
-
-    def countNodes(self):
-        return len(self.Open) + len(self.Close)
+    # def countNodes(self):
+    #     return len(self.Open) + len(self.Close)
 
 class Node:
 
