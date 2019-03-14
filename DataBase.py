@@ -15,8 +15,6 @@ class DataBase:
 
     def set_next(self, _state, _next):
         e_state = encode_board(_state)
-        if e_state == 3619072877532957915184197882445:
-            print("hello")
         e_move = encode_move(_state, _next)
         self.Encoded_States[e_state] = e_move
 
@@ -27,8 +25,6 @@ class DataBase:
         # if 0 -> return 0 (dead end)
         # else decode next nove and make it relevant to _state -> return next
         e_state = encode_board(_state)
-        if e_state == 3619072877532957915184197882445:
-            print("hello")
         if e_state not in self.Encoded_States:
             self.add(e_state)
             return 1
