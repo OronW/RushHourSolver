@@ -287,58 +287,6 @@ class Astar:
 
         return "XR" + str(steps_to_end + 1)
 
-    # def getEBF(self):
-    #     nodes = self.Open + self.Close
-    #     ebf = 0
-    #     n = len(nodes)
-    #     for i in range(0, n):
-    #         ebf += nodes[i][1].BF
-    #
-    #     return ebf / n
-
-    # def get_depth(self):
-    #     nodes = self.Open
-    #     n = len(nodes)
-    #     min = math.inf
-    #     max = 0
-    #     avg = 0
-    #
-    #     for i in range(0, n):
-    #         d = nodes[i][1].depth
-    #         if d < min:
-    #             min = d
-    #         if d > max:
-    #             max = d
-    #         avg += d
-    #
-    #     avg = avg / n
-    #     return [min, avg, max]
-
-    # def getHeuristicAverage(self):
-    #     nodes = self.Open + self.Close
-    #     h = 0
-    #     n = len(nodes)
-    #     for i in range(0, n):
-    #         h += nodes[i][1].F - nodes[i][1].depth
-    #
-    #     return h / n
-
-    # def getDepthRatio(self):
-    #     nodes = self.Open
-    #     n = len(nodes)
-    #     max_depth = 0
-    #     N = n + len(self.Close)
-    #
-    #     for i in range(0, n):
-    #         d = nodes[i][1].depth
-    #         if d > max_depth:
-    #             max_depth = d
-    #
-    #     return max_depth / N
-
-    # def countNodes(self):
-    #     return len(self.Open) + len(self.Close)
-
 
 class Node:
 
