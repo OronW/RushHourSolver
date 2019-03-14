@@ -51,7 +51,7 @@ def RUN(_time, _heuristic):
 
     print("==========================================\n"
           "SUMMARY\n"
-          "Solved ", count, " out of ", i - 1, "puzzles with heuristic number ", _heuristic, "\n"
+          "Solved ", count, " out of ", i - 1, " puzzles with heuristic number ", _heuristic, " with time limit of  ",_time, "\n"
           "Total time - ", total_time, "\n"
            "Average time for one puzzle - ", total_time / count, "\n"
            "Average steps for one puzzle - ", total_steps / count, "\n")
