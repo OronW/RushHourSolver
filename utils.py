@@ -19,12 +19,9 @@ def encode_board(_state):
     for c in _state.get_string_board():
         first_bit = str(int(c == '.' or c == 'X'))
         if c != '.':
-            # print('{},{},{}'.format(first_bit, _state.get.board()get_vehicle(c).get_direction(),
-            #                           _state.get_vehicle(c).get_length()))
             second_bit = str(int(_state.get_board().get_vehicle(c).get_direction() == 'V'))
             third_bit = str(int(_state.get_board().get_vehicle(c).get_length() == 3))
         else:
-            # print('1,0,1')
             second_bit = '0'
             third_bit = '1'
         bin_state += first_bit + second_bit + third_bit
@@ -48,8 +45,6 @@ def encode_move(_state, _next):
     else:
         e_direction = '11'
 
-    if _next[2] == '.':
-        print("fuck")
     steps = bin(int(_next[2]))[2:]
     steps = steps.zfill(3)
 

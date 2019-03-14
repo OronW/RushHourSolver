@@ -28,7 +28,8 @@ def RUN(_time, _heuristic):
             results = AObj.solve(_time, _heuristic, my_DBs[n])
 
             if results is None:
-                print("-E- Could not solve puzzle number ", i, " due to time limit")
+                print("-E- Could not solve puzzle number ", i, " due to time limit\n"
+                      "==========================================")
 
             else:
                 solution_path = results[0]
@@ -48,9 +49,9 @@ def RUN(_time, _heuristic):
             puzzle = fh.readline()
         fh.close()
 
-    print("==============================================================================\n"
+    print("==========================================\n"
           "SUMMARY\n"
-          "Solved ", count, " out of ", i + 1, "puzzles with heuristic number ", _heuristic, "\n"
+          "Solved ", count, " out of ", i - 1, "puzzles with heuristic number ", _heuristic, "\n"
           "Total time - ", total_time, "\n"
            "Average time for one puzzle - ", total_time / count, "\n"
            "Average steps for one puzzle - ", total_steps / count, "\n")

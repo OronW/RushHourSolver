@@ -61,38 +61,38 @@ class Astar:
         self.Open_dic.update({self.first_node.name: self.first_node.F})
 
         while (self.Open) and (time()-start < max_time):
-            currentNode = self.open_pop()
-            res = DB.get_next(currentNode.state)
+            curr_node = self.open_pop()
+            res = DB.get_next(curr_node.state)
             if res == 0:
                 continue
             if res != 1:
                 while True:
-                    self.close_push(currentNode)
-                    self.Close_dic.update({currentNode.name: currentNode.F})
-                    self.expand_from_DB(currentNode, _heuristic, res)
-                    currentNode = self.open_pop()
-                    res = DB.get_next(currentNode.state)
+                    self.close_push(curr_node)
+                    self.Close_dic.update({curr_node.name: curr_node.F})
+                    self.expand_from_DB(curr_node, _heuristic, res)
+                    curr_node = self.open_pop()
+                    res = DB.get_next(curr_node.state)
                     if res == 1:
                         flag = 1
                         break
 
             # check if solved
-            if (flag == 1) or (currentNode.state.final_move()):
+            if (flag == 1) or (curr_node.state.final_move()):
                 # DONE:
                 end = time()
                 t = end - start
-                result = [self.printSolutionHeap(currentNode, DB, flag), currentNode.depth + 1, t]
+                result = [self.printSolutionHeap(curr_node, DB, flag), curr_node.depth + 1, t]
                 return result
 
             # put node in CLOSED
-            self.close_push(currentNode)
-            self.Close_dic.update({currentNode.name: currentNode.F})
+            self.close_push(curr_node)
+            self.Close_dic.update({curr_node.name: curr_node.F})
 
             # Expand node
-            self.expand(currentNode, _heuristic)
+            self.expand(curr_node, _heuristic)
 
         end = time()
-        if (not self.Open):
+        if not self.Open:
             print("Open empty; solution not found")
 
         result = None
@@ -106,19 +106,14 @@ class Astar:
 
         curr_state = node.state
 
-        if (n == 0):
+        if n == 0:
             print("Solution not found")
             return False
 
         for i in range(0, n):
-            # copy current state
             next_state = copy.deepcopy(curr_state)
-
-            # perform move [i]
             next_state.run_command(moves[i][-3:])
             s = next_state.get_string_board()
-
-            # Eval next_state
             if _heuristic == 1:
                 h = self.heuristic1(next_state)
             else:
@@ -126,15 +121,13 @@ class Astar:
 
             f = h + depth + 1
 
-            """CASE 1 : new state is neither in OPEN nor in CLOSE"""
-            if (not s in self.Open_dic) and (not s in self.Close_dic):
-                # Create child node
+            # CASE 1 : new state is neither in OPEN nor in CLOSE"""
+            if (s not in self.Open_dic) and (s not in self.Close_dic):
                 next_node = Node(next_state, depth + 1)
                 next_node.F = f
                 next_node.parent = node
                 next_node.previous_move = moves[i]
 
-                # insert child node to OPEN
                 self.open_push(next_node)
                 self.Open_dic.update({s: f})
 
@@ -163,22 +156,14 @@ class Astar:
             elif s in self.Close_dic:
                 other_F = self.Close_dic.get(s)
                 if other_F > f:
-                    # DO: Repalce previous state with this state
-                    # Move this state to OPEN
-
-                    # Create child node
                     next_node = Node(next_state, depth + 1)
                     next_node.F = f
                     next_node.parent = node
                     next_node.previous_move = moves[i]
 
-                    # remove old node
                     self.remove_node(self.Close, s)
-
-                    # put node in OPEN
                     self.open_push(next_node)
 
-                    # update both dictionaries
                     self.Open_dic.update({s: f})
                     self.Close_dic.pop(s)
 
@@ -189,14 +174,11 @@ class Astar:
 
         curr_state = node.state
 
-        # copy current state
         next_state = copy.deepcopy(curr_state)
 
-        # perform move
         next_state.run_command(_command)
         s = next_state.get_string_board()
 
-        # Eval next_state
         if _heuristic == 1:
             h = self.heuristic1(next_state)
         else:
@@ -204,29 +186,26 @@ class Astar:
 
         f = h + depth + 1
 
-        """CASE 1 : new state is neither in OPEN nor in CLOSE"""
-        if (not s in self.Open_dic) and (not s in self.Close_dic):
-            # Create child node
+        if (s not in self.Open_dic) and (s not in self.Close_dic):
             next_node = Node(next_state, depth + 1)
             next_node.F = f
             next_node.parent = node
             next_node.previous_move = s + _command
 
-            # insert child node to OPEN
             self.open_push(next_node)
             self.Open_dic.update({s: f})
 
         return True
 
-    def heuristic1(self, state):  # this heuristic returns the number of blocked squares for the red car
+    def heuristic1(self, _state):  # this heuristic returns the number of blocked squares for the red car
         h = 0
-        goalcar = state.get_board().get_vehicle('X')
-        x = int(goalcar.top_left / 6)
-        y = goalcar.top_left % 6
-        y = y + goalcar.get_length()
+        vehicle = _state.get_board().get_vehicle('X')
+        x = int(vehicle.top_left / 6)
+        y = vehicle.top_left % 6
+        y = y + vehicle.get_length()
 
         for i in range(y, 6):
-            if state.get_string_board()[x * 6 + i] != '.':
+            if _state.get_string_board()[x * 6 + i] != '.':
                 h += 1
 
         return h
@@ -245,14 +224,6 @@ class Astar:
                 h += blocking_vehicle.get_length() + 1
 
         return h
-
-    # given string s of a state,
-    # def isNewState(self, state):
-    #     s = state.boardToString()
-    #     if (s in self.d):
-    #         return False
-    #     else:
-    #         return True
 
     def updateDict(self, obj, key):
         if type(obj) is State:
@@ -285,7 +256,9 @@ class Astar:
         head = copy.deepcopy(node)
         path = []
         if _flag == 0:
-            next_move = self.lastMove(head)
+            next_move = self.set_final_move(head)
+        else:
+            mext_move = ""
 
         while node.parent is not None:
             if _flag == 0:
@@ -305,11 +278,11 @@ class Astar:
             print("HEAD NONE")
 
         if _flag == 0:
-            solution = solution + " " + self.lastMove(head)
+            solution = solution + " " + self.set_final_move(head)
 
         return solution
 
-    def lastMove(self, node):
+    def set_final_move(self, node):
         steps_to_end = 6 - (node.state.get_board().get_vehicle('X').bottom_right % 6)
 
         return "XR" + str(steps_to_end + 1)
@@ -366,38 +339,21 @@ class Astar:
     # def countNodes(self):
     #     return len(self.Open) + len(self.Close)
 
+
 class Node:
 
+    # Build node
     def __init__(self, _state, _depth):
 
-        #state the node represents
         self.state = _state
-
-        #name of state
         self.name = _state.get_string_board()
-
-        #list of possible moves
         self.moves = self.state.find_next_steps()
-
-        #move performed to reach current node
         self.previous_move = None
-
-        #next move to visit
-        self.move_index=0
-
-        # branch factor
+        self.move_index = 0
         self.BF = len(self.moves)
-
-        #depth : how many moves to get this state
         self.depth = _depth
-
-        #Estimation of distance from goal state
         self.F = 0
-
-        #pointer to parent node
         self.parent = None
-
-
 
     def __lt__(self, other):
         return self.F < other.F
